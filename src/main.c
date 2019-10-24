@@ -61,7 +61,7 @@ static char* readFile(const char* path)
 static void runFile(const char* path)
 {
 	char* source = readFile(path);
-	interpretResult result = interpret(source);
+	InterpretResult result = interpret(source);
 	free(source);
 
 	if(result == INTERPRET_COMPILE_ERROR) exit(65);
@@ -86,7 +86,7 @@ int main(int argc, const char* argv[])
 	}
 	else
 	{
-		fprintf(stderr, "Usage: clox [path]\n", );
+		fprintf(stderr, "Usage: clox [path]\n");
 		exit(64);
 	}
 

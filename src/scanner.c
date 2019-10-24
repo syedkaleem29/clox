@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <string.h>
 
 #include "common.h"
@@ -57,7 +56,7 @@ static char advance()
 static bool match(char expected)
 {
 	if(isAtEnd()) return false;
-	if(scanner.current != expected) return false;
+	if(*scanner.current != expected) return false;
 
 	scanner.current++;
 	return true;
@@ -74,7 +73,7 @@ static char peekNext()
 	return scanner.current[1];
 }
 
-static skipWhiteSpace()
+static void skipWhiteSpace()
 {
 	for(;;)
 	{
@@ -112,7 +111,7 @@ static Token string()
 {
 	while(peek() != '"' && !isAtEnd())
 	{
-		if(peek == '\n') scanner.line++;
+		if(peek() == '\n') scanner.line++;
 		advance();
 	}
 
@@ -131,7 +130,7 @@ static Token number()
 {
 	while(isDigit(peek()))
 	{
-		advance()
+		advance();
 	}
 
 	if(peek() == '.' && isDigit(peekNext()))
@@ -238,7 +237,7 @@ Token scanToken()
 		case '=': return makeToken(match('=') ? TOKEN_EQUAL_EQUAL : TOKEN_EQUAL);
 		case '<': return makeToken(match('=') ? TOKEN_LESS : TOKEN_LESS_EQUAL);
 		case '>': return makeToken(match('=') ? TOKEN_GREATER : TOKEN_GREATER_EQUAL);
-		case '=': return string();
+		case '"': return string();
 	}
 
 	return errorToken("Unexpected character");
