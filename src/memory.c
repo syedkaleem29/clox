@@ -15,13 +15,13 @@ void* reallocate(void* previous, size_t oldSize, size_t newSize)
 	return realloc(previous, newSize);
 }
 
-static freeObject(Obj* object)
+static void freeObject(Obj* object)
 {
-	switch(obj->type)
+	switch(object->type)
 	{
 		case OBJ_STRING:
 		{
-			ObjString* string = (ObjString*)Object;
+			ObjString* string = (ObjString*)object;
 			FREE_ARRAY(char, string->chars, string->length+1);
 			FREE(OBJ_STRING, object);
 			break;
