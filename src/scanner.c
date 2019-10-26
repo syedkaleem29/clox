@@ -115,7 +115,7 @@ static Token string()
 		advance();
 	}
 
-	if(isAtEnd) return errorToken("Unterminated String");
+	if(isAtEnd()) return errorToken("Unterminated String");
 
 	advance();
 	return makeToken(TOKEN_STRING);
