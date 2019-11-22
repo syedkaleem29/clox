@@ -169,10 +169,16 @@ static InterpretResult run()
 			}
 			case OP_GREATER: BINARY_OP(BOOL_VAL, >); break;
 			case OP_LESS: BINARY_OP(BOOL_VAL, <); break;
-			case OP_RETURN:
+			case OP_PRINT: 
 			{
 				printValue(pop());
 				printf("\n");
+				break;
+			}
+			case OP_POP: pop(); break;
+			case OP_RETURN:
+			{
+				//Exit Interpreter
 				return INTERPRET_OK;
 			}
 		}
